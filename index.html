@@ -1,74 +1,376 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>A Little Surprise 🎁</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background: #ffe6f0;
-            text-align: center;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Birthday Surprise 🎂</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #fff3d6, #ffe8c7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .page {
+        display: none;
+        width: 100%;
+        max-width: 650px;
+        padding: 25px;
+        animation: fadeIn 0.7s ease;
+    }
+
+    .page.active {
+        display: block;
+    }
+
+    .box {
+        background: rgba(255,255,255,0.95);
+        padding: 40px 30px;
+        border-radius: 25px;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+        color: #d97706;
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #92400e;
+        font-size: 28px;
+    }
+
+    p {
+        color: #444;
+        font-size: 18px;
+        line-height: 1.7;
+    }
+
+    .emoji {
+        font-size: 55px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 13px 28px;
+        margin: 12px;
+        border: none;
+        border-radius: 25px;
+        font-size: 17px;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.06);
+    }
+
+    .yes-btn,
+    .continue-btn {
+        background: #d97706;
+        color: white;
+    }
+
+    .no-btn {
+        background: #d1d5db;
+        color: #333;
+    }
+
+    /* Teddy */
+    .teddy {
+        font-size: 120px;
+        animation: teddyBounce 1.2s infinite alternate;
+        margin: 20px;
+    }
+
+    .birthday {
+        color: #b45309;
+        font-size: 38px;
+        font-weight: bold;
+    }
+
+    .name {
+        color: #92400e;
+        font-size: 42px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .confetti {
+        position: fixed;
+        top: -20px;
+        font-size: 25px;
+        animation: fall linear forwards;
+        pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes teddyBounce {
+        from {
+            transform: translateY(0);
+        }
+
+        to {
+            transform: translateY(-12px);
+        }
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    @media (max-width: 600px) {
+
+        h1 {
+            font-size: 26px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 16px;
         }
 
         .box {
-            background: white;
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 30px 20px;
         }
 
-        h1 {
-            color: #e75480;
+        .birthday {
+            font-size: 30px;
         }
 
-        button {
-            padding: 12px 25px;
-            margin: 10px;
-            border: none;
-            border-radius: 20px;
-            font-size: 18px;
-            cursor: pointer;
+        .name {
+            font-size: 34px;
         }
-
-        #yes {
-            background: #e75480;
-            color: white;
-        }
-
-        #no {
-            background: #ddd;
-        }
-    </style>
+    }
+</style>
 </head>
 
 <body>
 
-<div class="box">
-    <h1>Are you eager to open my gift? 🎁</h1>
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+    <div class="box">
 
-    <button id="yes" onclick="nextPage()">YES 💗</button>
-    <button id="no">NO 😒</button>
+        <div class="emoji">🎁</div>
+
+        <h1>Are you eager to open my gift?</h1>
+
+        <p>
+            I made something for you.<br>
+            But first... you have to choose wisely. 😌
+        </p>
+
+        <button class="yes-btn" onclick="showPage(2)">
+            YES 🎉
+        </button>
+
+        <button class="no-btn" id="noButton">
+            NO 😒
+        </button>
+
+    </div>
 </div>
 
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <div class="box">
+
+        <div class="emoji">🎂</div>
+
+        <h1>Well well well...</h1>
+
+        <p>
+            Someone finally decided to open the gift. 😂
+        </p>
+
+        <p>
+            Anyway, before you continue,<br>
+            there's something I want to say.
+        </p>
+
+        <button class="continue-btn" onclick="showPage(3)">
+            Continue →
+        </button>
+
+    </div>
+</div>
+
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+    <div class="box">
+
+        <div class="emoji">🧸</div>
+
+        <h2>To one of my favourite idiots...</h2>
+
+        <p>
+            Having a friend like you is honestly one of those
+            things I didn't know I needed until you became such
+            an important part of my life.
+        </p>
+
+        <p>
+            Thank you for all the random conversations,
+            stupid jokes, annoying moments, unforgettable memories,
+            and for being there when I needed someone.
+        </p>
+
+        <p>
+            We've had our share of chaos, and somehow,
+            we're still friends. So I guess we're doing something right. 😂
+        </p>
+
+        <p>
+            I hope this year brings you a lot of happiness,
+            success, good memories and plenty of reasons to laugh.
+        </p>
+
+        <p>
+            Stay the same crazy person you are.
+            And yes, you're officially stuck with this friendship. 😌
+        </p>
+
+        <button class="continue-btn" onclick="showPage(4); startConfetti();">
+            Continue →
+        </button>
+
+    </div>
+</div>
+
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+    <div class="box">
+
+        <div class="teddy">🧸</div>
+
+        <div class="birthday">
+            HAPPY BIRTHDAY!
+        </div>
+
+        <div class="name">
+            YOUR NAME HERE
+        </div>
+
+        <p>
+            🎉 Another year older.  
+            Somehow still the same idiot. 😂
+        </p>
+
+        <p>
+            Have an amazing birthday! 🎂
+        </p>
+
+    </div>
+</div>
+
+
 <script>
-    function nextPage() {
-        alert("Yay! You chose YES! 🥰");
+
+    /* PAGE CHANGING */
+
+    function showPage(pageNumber) {
+
+        document.querySelectorAll(".page").forEach(function(page) {
+            page.classList.remove("active");
+        });
+
+        document.getElementById("page" + pageNumber)
+            .classList.add("active");
     }
 
-    const noButton = document.getElementById("no");
 
-    noButton.addEventListener("mouseover", function() {
-        const x = Math.random() * (window.innerWidth - 120);
-        const y = Math.random() * (window.innerHeight - 60);
+    /* RUN-AWAY NO BUTTON */
+
+    const noButton = document.getElementById("noButton");
+
+    function moveNoButton() {
+
+        const buttonWidth = noButton.offsetWidth;
+        const buttonHeight = noButton.offsetHeight;
+
+        const maxX = window.innerWidth - buttonWidth - 10;
+        const maxY = window.innerHeight - buttonHeight - 10;
+
+        const randomX = Math.max(10, Math.random() * maxX);
+        const randomY = Math.max(10, Math.random() * maxY);
 
         noButton.style.position = "fixed";
-        noButton.style.left = x + "px";
-        noButton.style.top = y + "px";
+        noButton.style.left = randomX + "px";
+        noButton.style.top = randomY + "px";
+    }
+
+    /* Computer */
+    noButton.addEventListener("mouseover", moveNoButton);
+
+    /* Phone */
+    noButton.addEventListener("touchstart", function(event) {
+        event.preventDefault();
+        moveNoButton();
     });
+
+
+    /* CONFETTI */
+
+    function startConfetti() {
+
+        const pieces = ["🎉", "🎊", "✨", "🎂"];
+
+        for (let i = 0; i < 35; i++) {
+
+            const confetti = document.createElement("div");
+
+            confetti.classList.add("confetti");
+
+            confetti.innerText =
+                pieces[Math.floor(Math.random() * pieces.length)];
+
+            confetti.style.left =
+                Math.random() * 100 + "vw";
+
+            confetti.style.animationDuration =
+                (2 + Math.random() * 3) + "s";
+
+            document.body.appendChild(confetti);
+
+            setTimeout(function() {
+                confetti.remove();
+            }, 5000);
+        }
+    }
+
 </script>
 
 </body>
