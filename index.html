@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A Little Surprise 🎁</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #ffe6f0;
+            text-align: center;
+        }
+
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            color: #e75480;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #yes {
+            background: #e75480;
+            color: white;
+        }
+
+        #no {
+            background: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Are you eager to open my gift? 🎁</h1>
+
+    <button id="yes" onclick="nextPage()">YES 💗</button>
+    <button id="no">NO 😒</button>
+</div>
+
+<script>
+    function nextPage() {
+        alert("Yay! You chose YES! 🥰");
+    }
+
+    const noButton = document.getElementById("no");
+
+    noButton.addEventListener("mouseover", function() {
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 60);
+
+        noButton.style.position = "fixed";
+        noButton.style.left = x + "px";
+        noButton.style.top = y + "px";
+    });
+</script>
+
+</body>
+</html>
