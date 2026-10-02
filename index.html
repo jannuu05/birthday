@@ -20,13 +20,13 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-        overflow: hidden;
+        overflow-x: hidden;
     }
 
     .page {
         display: none;
         width: 100%;
-        max-width: 650px;
+        max-width: 700px;
         padding: 25px;
         animation: fadeIn 0.7s ease;
     }
@@ -36,7 +36,7 @@
     }
 
     .box {
-        background: rgba(255,255,255,0.95);
+        background: rgba(255,255,255,0.96);
         padding: 40px 30px;
         border-radius: 25px;
         box-shadow: 0 12px 35px rgba(0,0,0,0.12);
@@ -51,6 +51,7 @@
     h2 {
         color: #92400e;
         font-size: 28px;
+        margin-bottom: 20px;
     }
 
     p {
@@ -89,17 +90,21 @@
         color: #333;
     }
 
-    /* Teddy */
-    .teddy {
-        font-size: 120px;
-        animation: teddyBounce 1.2s infinite alternate;
-        margin: 20px;
+    /* FINAL TEDDY IMAGE */
+
+    .teddy-image {
+        width: 100%;
+        max-width: 600px;
+        border-radius: 20px;
+        margin: 10px auto 20px;
+        display: block;
     }
 
     .birthday {
         color: #b45309;
         font-size: 38px;
         font-weight: bold;
+        margin-top: 15px;
     }
 
     .name {
@@ -115,6 +120,7 @@
         font-size: 25px;
         animation: fall linear forwards;
         pointer-events: none;
+        z-index: 999;
     }
 
     @keyframes fadeIn {
@@ -126,16 +132,6 @@
         to {
             opacity: 1;
             transform: translateY(0);
-        }
-    }
-
-    @keyframes teddyBounce {
-        from {
-            transform: translateY(0);
-        }
-
-        to {
-            transform: translateY(-12px);
         }
     }
 
@@ -153,7 +149,7 @@
         }
 
         h2 {
-            font-size: 24px;
+            font-size: 23px;
         }
 
         p {
@@ -191,7 +187,7 @@
         </p>
 
         <button class="yes-btn" onclick="showPage(2)">
-            YES 🎉
+            YES 😉
         </button>
 
         <button class="no-btn" id="noButton">
@@ -215,8 +211,8 @@
         </p>
 
         <p>
-            Anyway, before you continue,<br>
-            there's something I want to say.
+            Now that you're here,<br>
+            there's something I want to tell you.
         </p>
 
         <button class="continue-btn" onclick="showPage(3)">
@@ -233,36 +229,48 @@
 
         <div class="emoji">🧸</div>
 
-        <h2>To one of my favourite idiots...</h2>
+        <h2>To one of the most unexpected people in my life...</h2>
 
         <p>
-            Having a friend like you is honestly one of those
-            things I didn't know I needed until you became such
-            an important part of my life.
+            It's actually funny how you came into my life.
+            You were just an online friend I happened to meet,
+            and somehow, without even expecting it,
+            you became such a good friend.
+        </p>
+
+        <p>
+            Somewhere along the way, we ended up knowing
+            at least half of each other's secrets. 😂
+            And honestly, I think that's pretty special.
+        </p>
+
+        <p>
+            One thing I really appreciate about our friendship
+            is that I can just be myself around you.
+            I don't have to pretend to be a certain way,
+            and I can randomly talk about things without
+            overthinking everything.
         </p>
 
         <p>
             Thank you for all the random conversations,
-            stupid jokes, annoying moments, unforgettable memories,
-            and for being there when I needed someone.
+            stupid jokes, crazy moments, and all the memories
+            we've collected along the way.
         </p>
 
         <p>
-            We've had our share of chaos, and somehow,
-            we're still friends. So I guess we're doing something right. 😂
+            I genuinely hope you have an amazing year ahead,
+            with lots of happiness, success, good experiences
+            and plenty of reasons to laugh.
         </p>
 
         <p>
-            I hope this year brings you a lot of happiness,
-            success, good memories and plenty of reasons to laugh.
+            And yes... somehow you are now stuck with this
+            friendship. 😂
         </p>
 
-        <p>
-            Stay the same crazy person you are.
-            And yes, you're officially stuck with this friendship. 😌
-        </p>
-
-        <button class="continue-btn" onclick="showPage(4); startConfetti();">
+        <button class="continue-btn"
+                onclick="showPage(4); startConfetti();">
             Continue →
         </button>
 
@@ -274,18 +282,23 @@
 <div class="page" id="page4">
     <div class="box">
 
-        <div class="teddy">🧸</div>
+        <!-- PUT YOUR UPLOADED IMAGE HERE -->
+        <img
+            src="birthday-teddy.png"
+            alt="Birthday teddy"
+            class="teddy-image"
+        >
 
         <div class="birthday">
             HAPPY BIRTHDAY!
         </div>
 
         <div class="name">
-            Varun Vishal
+            YOUR FRIEND'S NAME
         </div>
 
         <p>
-            🎉 Another year older.  
+            🎉 Another year older.
             Somehow still the same idiot. 😂
         </p>
 
@@ -332,10 +345,14 @@
         noButton.style.top = randomY + "px";
     }
 
-    /* Computer */
+
+    /* COMPUTER */
+
     noButton.addEventListener("mouseover", moveNoButton);
 
-    /* Phone */
+
+    /* PHONE */
+
     noButton.addEventListener("touchstart", function(event) {
         event.preventDefault();
         moveNoButton();
@@ -346,9 +363,9 @@
 
     function startConfetti() {
 
-        const pieces = ["🎉", "🎊", "✨", "🎂"];
+        const pieces = ["🎉", "🎊", "✨", "🎂", "🥳"];
 
-        for (let i = 0; i < 35; i++) {
+        for (let i = 0; i < 40; i++) {
 
             const confetti = document.createElement("div");
 
