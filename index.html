@@ -7,7 +7,6 @@
 <title>A Birthday Surprise 🎂</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -27,7 +26,7 @@ body {
 .page {
     display: none;
     width: 100%;
-    max-width: 700px;
+    max-width: 720px;
     padding: 25px;
     animation: fadeIn 0.7s ease;
 }
@@ -37,7 +36,7 @@ body {
 }
 
 .box {
-    background: rgba(255,255,255,0.96);
+    background: rgba(255,255,255,0.97);
     padding: 40px 30px;
     border-radius: 25px;
     box-shadow: 0 12px 35px rgba(0,0,0,0.12);
@@ -89,8 +88,190 @@ button:hover {
     color: #333;
 }
 
+/* ---------------- PAGE 2 ENVELOPE ---------------- */
 
-/* FINAL TEDDY */
+.envelope-container {
+    margin: 25px auto;
+    width: 260px;
+    height: 180px;
+    position: relative;
+    cursor: pointer;
+}
+
+.envelope {
+    width: 260px;
+    height: 160px;
+    position: absolute;
+    bottom: 0;
+    background: #f59e0b;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-left: 130px solid transparent;
+    border-right: 130px solid transparent;
+    border-top: 95px solid #fbbf24;
+    transform-origin: top;
+    transition: transform 0.8s ease;
+    z-index: 3;
+}
+
+.envelope.open::before {
+    transform: rotateX(180deg);
+}
+
+.envelope::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-left: 130px solid #f59e0b;
+    border-right: 130px solid #f59e0b;
+    border-top: 80px solid transparent;
+    z-index: 2;
+}
+
+.letter {
+    position: absolute;
+    width: 210px;
+    height: 130px;
+    background: white;
+    left: 25px;
+    bottom: 15px;
+    z-index: 1;
+    border-radius: 5px;
+    padding: 15px;
+    color: #92400e;
+    font-weight: bold;
+    transition: transform 0.8s ease;
+}
+
+.envelope.open .letter {
+    transform: translateY(-100px);
+}
+
+.open-text {
+    color: #92400e;
+    font-size: 15px;
+}
+
+/* ---------------- PAGE 4 PARTY POPPER ---------------- */
+
+#partyTransition {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(255,243,214,0.98);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.popper {
+    font-size: 120px;
+    animation: popperShake 0.25s ease-in-out infinite alternate;
+}
+
+.popper-text {
+    font-size: 28px;
+    color: #92400e;
+    font-weight: bold;
+}
+
+@keyframes popperShake {
+    from {
+        transform: rotate(-12deg) scale(1);
+    }
+    to {
+        transform: rotate(12deg) scale(1.08);
+    }
+}
+
+.burst-piece {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    font-size: 25px;
+    z-index: 10001;
+    pointer-events: none;
+    animation: burst 1.7s ease-out forwards;
+}
+
+@keyframes burst {
+    from {
+        transform: translate(-50%,-50%) scale(0.3) rotate(0deg);
+        opacity: 1;
+    }
+
+    to {
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            scale(1)
+            rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ---------------- PAGE 6 CAKE ---------------- */
+
+.cake-area {
+    margin: 20px auto;
+}
+
+.cake {
+    font-size: 120px;
+    position: relative;
+    display: inline-block;
+}
+
+.flame {
+    font-size: 45px;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: flicker 0.25s infinite alternate;
+}
+
+.flame.off {
+    display: none;
+}
+
+@keyframes flicker {
+    from {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-50%) scale(0.75);
+        opacity: 0.65;
+    }
+}
+
+.countdown {
+    font-size: 55px;
+    font-weight: bold;
+    color: #d97706;
+    margin: 10px;
+}
+
+.blow-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #92400e;
+}
+
+/* ---------------- FINAL PAGE ---------------- */
 
 .teddy-image {
     width: 100%;
@@ -113,9 +294,6 @@ button:hover {
     margin-top: 10px;
 }
 
-
-/* CONFETTI */
-
 .confetti {
     position: fixed;
     top: -30px;
@@ -126,127 +304,15 @@ button:hover {
 }
 
 @keyframes fall {
-
     to {
-        transform:
-            translateY(110vh)
-            rotate(720deg);
-
+        transform: translateY(110vh) rotate(720deg);
         opacity: 0;
     }
 }
 
-
-/* PARTY POPPER TRANSITION */
-
-#partyTransition {
-
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(255,243,214,0.98);
-
-    z-index: 10000;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-direction: column;
-}
-
-
-/* POPPER */
-
-.popper {
-
-    font-size: 110px;
-
-    animation:
-        popperShake 0.5s ease-in-out infinite alternate;
-}
-
-.popper-text {
-
-    font-size: 28px;
-
-    color: #92400e;
-
-    font-weight: bold;
-
-    margin-top: 15px;
-}
-
-
-@keyframes popperShake {
-
-    from {
-        transform: rotate(-12deg);
-    }
-
-    to {
-        transform: rotate(12deg);
-    }
-
-}
-
-
-/* BURST PIECES */
-
-.burst-piece {
-
-    position: fixed;
-
-    left: 50%;
-
-    top: 50%;
-
-    font-size: 25px;
-
-    z-index: 10001;
-
-    pointer-events: none;
-
-    animation:
-        burst 1.6s ease-out forwards;
-}
-
-
-@keyframes burst {
-
-    from {
-
-        transform:
-            translate(-50%, -50%)
-            scale(0.3)
-            rotate(0deg);
-
-        opacity: 1;
-    }
-
-    to {
-
-        transform:
-            translate(
-                calc(-50% + var(--x)),
-                calc(-50% + var(--y))
-            )
-            scale(1)
-            rotate(720deg);
-
-        opacity: 0;
-    }
-
-}
-
-
-/* FADE */
+/* ---------------- GENERAL ---------------- */
 
 @keyframes fadeIn {
-
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -256,11 +322,9 @@ button:hover {
         opacity: 1;
         transform: translateY(0);
     }
-
 }
 
-
-@media (max-width: 600px) {
+@media(max-width:600px) {
 
     h1 {
         font-size: 26px;
@@ -286,8 +350,21 @@ button:hover {
         font-size: 34px;
     }
 
-}
+    .envelope-container,
+    .envelope {
+        width: 230px;
+    }
 
+    .envelope::before {
+        border-left-width: 115px;
+        border-right-width: 115px;
+    }
+
+    .envelope::after {
+        border-left-width: 115px;
+        border-right-width: 115px;
+    }
+}
 </style>
 </head>
 
@@ -295,7 +372,7 @@ button:hover {
 <body>
 
 
-<!-- PAGE 1 -->
+<!-- ================= PAGE 1 ================= -->
 
 <div class="page active" id="page1">
 
@@ -303,32 +380,24 @@ button:hover {
 
         <div class="emoji">🎁</div>
 
-        <h1>
-            Are you eager to open my gift?
-        </h1>
+        <h1>Are you eager to open my gift?</h1>
 
         <p>
             I made something for you.<br>
             But first... you have to choose wisely. 😌
         </p>
 
-
         <button
             class="yes-btn"
             id="yesButton"
             onclick="yesClicked()">
-
             YES 😉
-
         </button>
-
 
         <button
             class="no-btn"
             id="noButton">
-
             NO 😒
-
         </button>
 
     </div>
@@ -336,34 +405,39 @@ button:hover {
 </div>
 
 
-
-<!-- PAGE 2 -->
+<!-- ================= PAGE 2 ================= -->
 
 <div class="page" id="page2">
 
     <div class="box">
 
-        <div class="emoji">🎂</div>
+        <h1>Something's waiting inside... 📩</h1>
 
-        <h1>
-            Well well well...
-        </h1>
+        <div
+            class="envelope-container"
+            onclick="openEnvelope()">
 
-        <p>
-            Someone finally decided to open the gift. 😂
-        </p>
+            <div class="envelope" id="envelope">
 
-        <p>
-            Now that you're here,<br>
-            there's something I want to tell you.
-        </p>
+                <div class="letter">
+                    A little something<br>
+                    for you 🎁
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="open-text" id="openText">
+            Tap the envelope to open it 👆
+        </div>
 
         <button
             class="continue-btn"
-            onclick="showPage(3)">
-
+            id="envelopeContinue"
+            onclick="showPage(3)"
+            style="display:none;">
             Continue →
-
         </button>
 
     </div>
@@ -371,70 +445,27 @@ button:hover {
 </div>
 
 
-
-<!-- PAGE 3 -->
+<!-- ================= PAGE 3 ================= -->
 
 <div class="page" id="page3">
 
     <div class="box">
 
-        <div class="emoji">🧸</div>
+        <div class="emoji">😂</div>
 
-        <h2>
-            To one of the most unexpected people in my life...
-        </h2>
-
-
-        <p>
-            It's actually funny how you came into my life.
-            You were just an online friend I happened to meet,
-            and somehow, without even expecting it,
-            you became such a good friend.
-        </p>
-
+        <h1>
+            Well, someone decided to open that thing.
+        </h1>
 
         <p>
-            Somewhere along the way, we ended up knowing
-            at least half of each other's secrets. 😂
-            And honestly, I think that's pretty special.
+            Since you're already here...
+            might as well continue. 😌
         </p>
-
-
-        <p>
-            One thing I really appreciate about our friendship
-            is that I can just be myself around you.
-            I don't have to pretend to be a certain way,
-            and I can randomly talk about things without
-            overthinking everything.
-        </p>
-
-
-        <p>
-            Thank you for all the random conversations,
-            stupid jokes, crazy moments, and all the memories
-            we've collected along the way.
-        </p>
-
-
-        <p>
-            I genuinely hope you have an amazing year ahead,
-            with lots of happiness, success, good experiences
-            and plenty of reasons to laugh.
-        </p>
-
-
-        <p>
-            And yes... somehow you are now stuck with this
-            friendship. 😂
-        </p>
-
 
         <button
             class="continue-btn"
             onclick="partyTransition()">
-
             Continue →
-
         </button>
 
     </div>
@@ -442,14 +473,11 @@ button:hover {
 </div>
 
 
-
-<!-- PARTY POPPER TRANSITION -->
+<!-- ================= PARTY TRANSITION ================= -->
 
 <div id="partyTransition">
 
-    <div class="popper">
-        🎉
-    </div>
+    <div class="popper">🎉</div>
 
     <div class="popper-text">
         WAIT FOR IT... 🎊
@@ -458,38 +486,112 @@ button:hover {
 </div>
 
 
+<!-- ================= PAGE 5 ================= -->
 
-<!-- PAGE 4 -->
-
-<div class="page" id="page4">
+<div class="page" id="page5">
 
     <div class="box">
 
-        <img
-            src="birthday-teddy.png"
-            alt="Birthday teddy"
-            class="teddy-image"
-        >
+        <div class="emoji">🧸</div>
 
-
-        <div class="birthday">
-            HAPPY BIRTHDAY!
-        </div>
-
-
-        <div class="name">
-            VARUN VISHAL
-        </div>
-
+        <h2>
+            To one of the most unexpected friends I ever met...
+        </h2>
 
         <p>
-            🎉 Another year older.
-            Somehow still the same TODDLER 😂
+            It's actually funny how you came into my life.
+            You were just an online friend I happened to meet,
+            and somehow, without either of us really expecting it,
+            you became such a good friend.
         </p>
 
+        <p>
+            Somehow our friendship went from random conversations
+            to those <b>late-night rants</b> where we could talk
+            about absolutely anything and everything. 😂
+        </p>
 
         <p>
-            Have an amazing birthday! 🎂
+            And let's not forget your absolutely
+            <b>horrible singing</b>. 😭
+            I don't know how you manage to sing with that much
+            confidence and that little talent.
+        </p>
+
+        <p>
+            The funniest part is that in such a short amount of time,
+            we somehow ended up knowing <b>more than half of each
+            other's life secrets</b>.
+            Like... how did that even happen? 😂
+        </p>
+
+        <p>
+            I'm genuinely glad that random online friendship
+            turned into this weird, comfortable friendship
+            where we can rant, joke around, share things,
+            and just be ourselves.
+        </p>
+
+        <p>
+            So yeah... thank you for all the conversations,
+            late-night nonsense, terrible singing,
+            random moments and memories. ❤️
+        </p>
+
+        <p>
+            And somehow, you're now stuck with this friendship.
+            No refunds. 😂
+        </p>
+
+        <button
+            class="continue-btn"
+            onclick="showPage(6); startCountdown();">
+            Continue →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PAGE 6 ================= -->
+
+<div class="page" id="page6">
+
+    <div class="box">
+
+        <div class="emoji">🎂</div>
+
+        <h1>One last thing...</h1>
+
+        <div class="blow-text">
+            Blow the candle! 🕯️
+        </div>
+
+        <div class="cake-area">
+
+            <div class="cake">
+
+                🎂
+
+                <div
+                    class="flame"
+                    id="flame">
+                    🔥
+                </div>
+
+            </div>
+
+        </div>
+
+        <div
+            class="countdown"
+            id="countdown">
+            3
+        </div>
+
+        <p id="candleMessage">
+            Get ready... 😌
         </p>
 
     </div>
@@ -497,11 +599,46 @@ button:hover {
 </div>
 
 
+<!-- ================= PAGE 7 ================= -->
+
+<div class="page" id="page7">
+
+    <div class="box">
+
+        <img
+            src="birthday-teddy.png"
+            alt="Birthday teddy"
+            class="teddy-image">
+
+        <div class="birthday">
+            HAPPY BIRTHDAY! 🎉
+        </div>
+
+        <div class="name">
+            YOUR FRIEND'S NAME
+        </div>
+
+        <p>
+            Wishing you an amazing year ahead,
+            full of happiness, success, good memories
+            and plenty of reasons to laugh. 🎂
+        </p>
+
+        <p>
+            <b>
+                One more year older...
+                but still the same toddler. 😂
+            </b>
+        </p>
+
+    </div>
+
+</div>
+
 
 <script>
 
-
-/* PAGE CHANGE */
+/* ================= PAGE CONTROL ================= */
 
 function showPage(pageNumber) {
 
@@ -513,50 +650,33 @@ function showPage(pageNumber) {
 
         });
 
-
     document
         .getElementById("page" + pageNumber)
         .classList.add("active");
-
 }
 
 
-
-/* YES BUTTON */
+/* ================= YES BUTTON ================= */
 
 function yesClicked() {
 
     const yesButton =
         document.getElementById("yesButton");
 
-
-    /*
-       Change 😉 into 😄
-    */
-
     yesButton.innerHTML = "YES 😄";
-
-
-    /*
-       Tiny pause so he actually sees
-       the emoji change.
-    */
 
     setTimeout(function() {
 
         showPage(2);
 
-    }, 350);
-
+    }, 400);
 }
 
 
-
-/* RUN-AWAY NO BUTTON */
+/* ================= NO BUTTON RUNS AWAY ================= */
 
 const noButton =
     document.getElementById("noButton");
-
 
 function moveNoButton() {
 
@@ -566,27 +686,17 @@ function moveNoButton() {
     const buttonHeight =
         noButton.offsetHeight;
 
-
     const maxX =
         window.innerWidth - buttonWidth - 10;
 
     const maxY =
         window.innerHeight - buttonHeight - 10;
 
-
     const randomX =
-        Math.max(
-            10,
-            Math.random() * maxX
-        );
-
+        Math.max(10, Math.random() * maxX);
 
     const randomY =
-        Math.max(
-            10,
-            Math.random() * maxY
-        );
-
+        Math.max(10, Math.random() * maxY);
 
     noButton.style.position = "fixed";
 
@@ -595,21 +705,12 @@ function moveNoButton() {
 
     noButton.style.top =
         randomY + "px";
-
 }
-
-
-
-/* COMPUTER */
 
 noButton.addEventListener(
     "mouseover",
     moveNoButton
 );
-
-
-
-/* PHONE */
 
 noButton.addEventListener(
     "touchstart",
@@ -623,202 +724,211 @@ noButton.addEventListener(
 );
 
 
+/* ================= ENVELOPE ================= */
 
-/* PARTY TRANSITION */
+function openEnvelope() {
+
+    const envelope =
+        document.getElementById("envelope");
+
+    const text =
+        document.getElementById("openText");
+
+    const continueButton =
+        document.getElementById("envelopeContinue");
+
+    envelope.classList.add("open");
+
+    text.innerHTML =
+        "Okay... you found the letter. 👀";
+
+    setTimeout(function() {
+
+        continueButton.style.display =
+            "inline-block";
+
+    }, 900);
+}
+
+
+/* ================= PARTY POPPER ================= */
 
 function partyTransition() {
 
-
     const transition =
-        document.getElementById(
-            "partyTransition"
-        );
+        document.getElementById("partyTransition");
 
-
-    transition.style.display =
-        "flex";
-
-
-    /*
-       Create lots of pieces
-       flying out from the centre.
-    */
+    transition.style.display = "flex";
 
     const pieces = [
         "🎊",
         "🎉",
         "✨",
         "🎈",
-        "🎂",
         "🥳",
-        "⭐"
+        "⭐",
+        "📜"
     ];
 
-
-    for (let i = 0; i < 70; i++) {
-
+    for (let i = 0; i < 80; i++) {
 
         const piece =
             document.createElement("div");
 
-
         piece.className =
             "burst-piece";
-
 
         piece.innerText =
             pieces[
                 Math.floor(
-                    Math.random() *
-                    pieces.length
+                    Math.random() * pieces.length
                 )
             ];
 
-
-        /*
-           Random direction
-        */
-
         const angle =
-            Math.random() *
-            Math.PI * 2;
-
+            Math.random() * Math.PI * 2;
 
         const distance =
-            250 +
-            Math.random() * 500;
-
+            250 + Math.random() * 600;
 
         const x =
-            Math.cos(angle) *
-            distance;
-
+            Math.cos(angle) * distance;
 
         const y =
-            Math.sin(angle) *
-            distance;
-
+            Math.sin(angle) * distance;
 
         piece.style.setProperty(
             "--x",
             x + "px"
         );
 
-
         piece.style.setProperty(
             "--y",
             y + "px"
         );
 
-
         transition.appendChild(piece);
 
+        setTimeout(function() {
 
-        setTimeout(
-            function() {
+            piece.remove();
 
-                piece.remove();
-
-            },
-            1800
-        );
-
+        }, 1800);
     }
 
+    setTimeout(function() {
 
-    /*
-       After the burst,
-       reveal the final page.
-    */
+        transition.style.display =
+            "none";
 
-    setTimeout(
-        function() {
+        showPage(5);
 
-            transition.style.display =
-                "none";
-
-
-            showPage(4);
-
-
-            startConfetti();
-
-
-        },
-        1900
-    );
-
+    }, 1900);
 }
 
 
+/* ================= CANDLE COUNTDOWN ================= */
 
-/* FINAL CONFETTI */
+function startCountdown() {
+
+    const countdown =
+        document.getElementById("countdown");
+
+    const flame =
+        document.getElementById("flame");
+
+    const message =
+        document.getElementById("candleMessage");
+
+    let number = 3;
+
+    countdown.innerHTML = number;
+
+    message.innerHTML =
+        "Get ready... 🕯️";
+
+    setTimeout(function() {
+
+        number = 2;
+
+        countdown.innerHTML = number;
+
+    }, 1000);
+
+    setTimeout(function() {
+
+        number = 1;
+
+        countdown.innerHTML = number;
+
+    }, 2000);
+
+    setTimeout(function() {
+
+        countdown.innerHTML = "0";
+
+        message.innerHTML =
+            "And... the candle is out! 🎉";
+
+        flame.classList.add("off");
+
+    }, 3000);
+
+    setTimeout(function() {
+
+        showPage(7);
+
+        startConfetti();
+
+    }, 4000);
+}
+
+
+/* ================= FINAL CONFETTI ================= */
 
 function startConfetti() {
-
 
     const pieces = [
         "🎉",
         "🎊",
         "✨",
         "🎂",
-        "🥳"
+        "🥳",
+        "🎈"
     ];
 
-
-    for (
-        let i = 0;
-        i < 40;
-        i++
-    ) {
-
+    for (let i = 0; i < 50; i++) {
 
         const confetti =
-            document.createElement(
-                "div"
-            );
-
+            document.createElement("div");
 
         confetti.classList.add(
             "confetti"
         );
 
-
         confetti.innerText =
             pieces[
                 Math.floor(
-                    Math.random() *
-                    pieces.length
+                    Math.random() * pieces.length
                 )
             ];
 
-
         confetti.style.left =
-            Math.random() * 100 +
-            "vw";
-
+            Math.random() * 100 + "vw";
 
         confetti.style.animationDuration =
-            (2 + Math.random() * 3) +
-            "s";
-
+            (2 + Math.random() * 3) + "s";
 
         document.body.appendChild(
             confetti
         );
 
+        setTimeout(function() {
 
-        setTimeout(
-            function() {
+            confetti.remove();
 
-                confetti.remove();
-
-            },
-            5000
-        );
-
+        }, 5000);
     }
-
 }
 
 </script>
