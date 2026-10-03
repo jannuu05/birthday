@@ -7,6 +7,9 @@
 <title>A Birthday Surprise 🎂</title>
 
 <style>
+
+/* ================= GENERAL ================= */
+
 * {
     box-sizing: border-box;
 }
@@ -88,79 +91,85 @@ button:hover {
     color: #333;
 }
 
-/* ---------------- PAGE 2 ENVELOPE ---------------- */
+
+/* ================= PAGE 2 : PINK ENVELOPE ================= */
 
 .envelope-container {
-    margin: 25px auto;
-    width: 260px;
-    height: 180px;
+    width: 300px;
+    height: 230px;
+    margin: 35px auto 20px;
     position: relative;
     cursor: pointer;
 }
 
 .envelope {
-    width: 260px;
-    height: 160px;
+    width: 300px;
+    height: 190px;
     position: absolute;
     bottom: 0;
-    background: #f59e0b;
-    border-radius: 5px;
-    overflow: hidden;
+    left: 0;
+    background: #f472b6;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-.envelope::before {
-    content: "";
+/* Pink triangular flap */
+
+.envelope-flap {
     position: absolute;
-    left: 0;
     top: 0;
-    border-left: 130px solid transparent;
-    border-right: 130px solid transparent;
-    border-top: 95px solid #fbbf24;
-    transform-origin: top;
-    transition: transform 0.8s ease;
-    z-index: 3;
-}
-
-.envelope.open::before {
-    transform: rotateX(180deg);
-}
-
-.envelope::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
     left: 0;
-    border-left: 130px solid #f59e0b;
-    border-right: 130px solid #f59e0b;
-    border-top: 80px solid transparent;
-    z-index: 2;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 105px solid #ec4899;
+    transform-origin: top;
+    transition: transform 0.9s ease;
+    z-index: 4;
 }
+
+/* White letter */
 
 .letter {
     position: absolute;
-    width: 210px;
-    height: 130px;
-    background: white;
-    left: 25px;
+    width: 240px;
+    height: 165px;
+    left: 30px;
     bottom: 15px;
-    z-index: 1;
+    background: white;
     border-radius: 5px;
-    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    z-index: 2;
+    padding: 25px 15px;
     color: #92400e;
     font-weight: bold;
-    transition: transform 0.8s ease;
+    font-size: 17px;
+
+    transform: translateY(0);
+    transition: transform 1s ease;
 }
 
+/* Envelope opens */
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+/* Letter pops upward */
+
 .envelope.open .letter {
-    transform: translateY(-100px);
+    transform: translateY(-125px);
 }
 
 .open-text {
     color: #92400e;
-    font-size: 15px;
+    font-size: 16px;
+    margin-top: 15px;
 }
 
-/* ---------------- PAGE 4 PARTY POPPER ---------------- */
+
+/* ================= PAGE 4 : HUGE POPPER ================= */
 
 #partyTransition {
     display: none;
@@ -170,26 +179,28 @@ button:hover {
     z-index: 10000;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
-.popper {
-    font-size: 120px;
-    animation: popperShake 0.25s ease-in-out infinite alternate;
+.big-popper {
+    font-size: 220px;
+    animation: hugePop 0.35s ease-out forwards;
 }
 
-.popper-text {
-    font-size: 28px;
-    color: #92400e;
-    font-weight: bold;
-}
+@keyframes hugePop {
 
-@keyframes popperShake {
-    from {
-        transform: rotate(-12deg) scale(1);
+    0% {
+        transform: scale(0.1) rotate(-15deg);
+        opacity: 0;
     }
-    to {
-        transform: rotate(12deg) scale(1.08);
+
+    50% {
+        transform: scale(1.4) rotate(8deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
     }
 }
 
@@ -197,15 +208,19 @@ button:hover {
     position: fixed;
     left: 50%;
     top: 50%;
-    font-size: 25px;
+    font-size: 30px;
     z-index: 10001;
     pointer-events: none;
     animation: burst 1.7s ease-out forwards;
 }
 
 @keyframes burst {
+
     from {
-        transform: translate(-50%,-50%) scale(0.3) rotate(0deg);
+        transform:
+            translate(-50%,-50%)
+            scale(0.2)
+            rotate(0deg);
         opacity: 1;
     }
 
@@ -215,63 +230,178 @@ button:hover {
                 calc(-50% + var(--x)),
                 calc(-50% + var(--y))
             )
-            scale(1)
+            scale(1.3)
             rotate(720deg);
         opacity: 0;
     }
 }
 
-/* ---------------- PAGE 6 CAKE ---------------- */
+
+/* ================= PAGE 6 : LARGE CAKE ================= */
 
 .cake-area {
-    margin: 20px auto;
+    margin: 25px auto;
+    position: relative;
 }
 
-.cake {
-    font-size: 120px;
+/* Large proper cake */
+
+.big-cake {
     position: relative;
-    display: inline-block;
+    width: 340px;
+    height: 230px;
+    margin: 80px auto 30px;
 }
+
+/* Bottom cake layer */
+
+.cake-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 300px;
+    height: 105px;
+    background: #f59e0b;
+    border-radius: 15px 15px 25px 25px;
+    box-shadow: inset 0 -15px rgba(217,119,6,0.25);
+}
+
+/* Middle cake layer */
+
+.cake-middle {
+    position: absolute;
+    bottom: 85px;
+    left: 45px;
+    width: 250px;
+    height: 75px;
+    background: #fbbf24;
+    border-radius: 15px 15px 20px 20px;
+}
+
+/* Top cake layer */
+
+.cake-top {
+    position: absolute;
+    bottom: 145px;
+    left: 70px;
+    width: 200px;
+    height: 65px;
+    background: #fde68a;
+    border-radius: 15px 15px 18px 18px;
+}
+
+/* Cream decorations */
+
+.cream {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 5px;
+}
+
+/* Cake candles */
+
+.candle {
+    position: absolute;
+    bottom: 205px;
+    width: 18px;
+    height: 65px;
+    background: #ec4899;
+    border-radius: 4px;
+}
+
+.candle.one {
+    left: 125px;
+}
+
+.candle.two {
+    left: 160px;
+}
+
+.candle.three {
+    left: 195px;
+}
+
+/* Flames */
 
 .flame {
-    font-size: 45px;
     position: absolute;
-    top: -10px;
+    top: -45px;
     left: 50%;
     transform: translateX(-50%);
-    animation: flicker 0.25s infinite alternate;
+    font-size: 40px;
+    animation: glow 0.5s infinite alternate;
 }
 
-.flame.off {
-    display: none;
-}
+@keyframes glow {
 
-@keyframes flicker {
     from {
         transform: translateX(-50%) scale(1);
         opacity: 1;
     }
 
     to {
-        transform: translateX(-50%) scale(0.75);
-        opacity: 0.65;
+        transform: translateX(-50%) scale(1.15);
+        opacity: 0.8;
     }
 }
 
+/* Candle blown-out animation */
+
+.flame.blowing {
+    animation:
+        blowFlicker 0.15s infinite alternate;
+}
+
+@keyframes blowFlicker {
+
+    0% {
+        transform: translateX(-50%) rotate(-20deg) scale(1);
+        opacity: 1;
+    }
+
+    25% {
+        transform: translateX(-65%) rotate(25deg) scale(0.9);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateX(-35%) rotate(-25deg) scale(0.75);
+        opacity: 0.6;
+    }
+
+    75% {
+        transform: translateX(-60%) rotate(20deg) scale(0.5);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateX(-50%) scale(0.2);
+        opacity: 0;
+    }
+}
+
+.flame.off {
+    display: none;
+}
+
 .countdown {
-    font-size: 55px;
+    font-size: 60px;
     font-weight: bold;
     color: #d97706;
     margin: 10px;
 }
 
 .blow-text {
-    font-size: 24px;
+    font-size: 25px;
     font-weight: bold;
     color: #92400e;
 }
 
-/* ---------------- FINAL PAGE ---------------- */
+
+/* ================= FINAL PAGE ================= */
 
 .teddy-image {
     width: 100%;
@@ -304,15 +434,20 @@ button:hover {
 }
 
 @keyframes fall {
+
     to {
-        transform: translateY(110vh) rotate(720deg);
+        transform:
+            translateY(110vh)
+            rotate(720deg);
         opacity: 0;
     }
 }
 
-/* ---------------- GENERAL ---------------- */
+
+/* ================= FADE ================= */
 
 @keyframes fadeIn {
+
     from {
         opacity: 0;
         transform: translateY(20px);
@@ -323,6 +458,9 @@ button:hover {
         transform: translateY(0);
     }
 }
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:600px) {
 
@@ -352,19 +490,30 @@ button:hover {
 
     .envelope-container,
     .envelope {
-        width: 230px;
+        width: 250px;
     }
 
-    .envelope::before {
-        border-left-width: 115px;
-        border-right-width: 115px;
+    .envelope-flap {
+        border-left-width: 125px;
+        border-right-width: 125px;
     }
 
-    .envelope::after {
-        border-left-width: 115px;
-        border-right-width: 115px;
+    .letter {
+        width: 205px;
+        left: 22px;
+    }
+
+    .big-popper {
+        font-size: 160px;
+    }
+
+    .big-cake {
+        transform: scale(0.78);
+        margin-left: auto;
+        margin-right: auto;
     }
 }
+
 </style>
 </head>
 
@@ -380,7 +529,9 @@ button:hover {
 
         <div class="emoji">🎁</div>
 
-        <h1>Are you eager to open my gift?</h1>
+        <h1>
+            Are you eager to open my gift?
+        </h1>
 
         <p>
             I made something for you.<br>
@@ -391,13 +542,17 @@ button:hover {
             class="yes-btn"
             id="yesButton"
             onclick="yesClicked()">
+
             YES 😉
+
         </button>
 
         <button
             class="no-btn"
             id="noButton">
+
             NO 😒
+
         </button>
 
     </div>
@@ -411,25 +566,35 @@ button:hover {
 
     <div class="box">
 
-        <h1>Something's waiting inside... 📩</h1>
+        <h1>
+            There's a letter for you... 💌
+        </h1>
 
         <div
             class="envelope-container"
             onclick="openEnvelope()">
 
-            <div class="envelope" id="envelope">
+            <div
+                class="envelope"
+                id="envelope">
 
                 <div class="letter">
                     A little something<br>
-                    for you 🎁
+                    made just for you 🎁
                 </div>
+
+                <div class="envelope-flap"></div>
 
             </div>
 
         </div>
 
-        <div class="open-text" id="openText">
-            Tap the envelope to open it 👆
+        <div
+            class="open-text"
+            id="openText">
+
+            Tap the pink cover to open it 👆
+
         </div>
 
         <button
@@ -437,7 +602,9 @@ button:hover {
             id="envelopeContinue"
             onclick="showPage(3)"
             style="display:none;">
+
             Continue →
+
         </button>
 
     </div>
@@ -451,21 +618,27 @@ button:hover {
 
     <div class="box">
 
-        <div class="emoji">😂</div>
+        <div class="emoji">📜😂</div>
 
         <h1>
-            Well, someone decided to open that thing.
+            Since you decided to open the letter...
         </h1>
 
         <p>
-            Since you're already here...
-            might as well continue. 😌
+            You are officially stuck with this friendship
+            forever. 😂
+        </p>
+
+        <p>
+            <b>No refunds.</b> 😌
         </p>
 
         <button
             class="continue-btn"
             onclick="partyTransition()">
+
             Continue →
+
         </button>
 
     </div>
@@ -473,14 +646,12 @@ button:hover {
 </div>
 
 
-<!-- ================= PARTY TRANSITION ================= -->
+<!-- ================= HUGE PARTY POPPER ================= -->
 
 <div id="partyTransition">
 
-    <div class="popper">🎉</div>
-
-    <div class="popper-text">
-        WAIT FOR IT... 🎊
+    <div class="big-popper">
+        🎉
     </div>
 
 </div>
@@ -495,7 +666,8 @@ button:hover {
         <div class="emoji">🧸</div>
 
         <h2>
-            To one of the most unexpected friends I ever met...
+            To one of the most unexpected friends
+            I ever met...
         </h2>
 
         <p>
@@ -514,14 +686,14 @@ button:hover {
         <p>
             And let's not forget your absolutely
             <b>horrible singing</b>. 😭
-            I don't know how you manage to sing with that much
-            confidence and that little talent.
+            I genuinely don't know how you manage to sing
+            with that much confidence.
         </p>
 
         <p>
-            The funniest part is that in such a short amount of time,
-            we somehow ended up knowing <b>more than half of each
-            other's life secrets</b>.
+            The funniest part is that in such a short amount
+            of time, we somehow ended up knowing
+            <b>more than half of each other's life secrets</b>.
             Like... how did that even happen? 😂
         </p>
 
@@ -533,20 +705,24 @@ button:hover {
         </p>
 
         <p>
-            So yeah... thank you for all the conversations,
+            Thank you for all the conversations,
             late-night nonsense, terrible singing,
-            random moments and memories. ❤️
+            random moments and memories we've collected
+            along the way.
         </p>
 
         <p>
-            And somehow, you're now stuck with this friendship.
-            No refunds. 😂
+            Here's to more ridiculous conversations,
+            more random memories,
+            and hopefully slightly less horrible singing. 😂
         </p>
 
         <button
             class="continue-btn"
             onclick="showPage(6); startCountdown();">
+
             Continue →
+
         </button>
 
     </div>
@@ -562,22 +738,79 @@ button:hover {
 
         <div class="emoji">🎂</div>
 
-        <h1>One last thing...</h1>
+        <h1>
+            One last thing...
+        </h1>
 
         <div class="blow-text">
-            Blow the candle! 🕯️
+            Blow the candles! 🕯️
         </div>
 
         <div class="cake-area">
 
-            <div class="cake">
+            <div class="big-cake">
 
-                🎂
+                <div class="cake-bottom">
 
-                <div
-                    class="flame"
-                    id="flame">
-                    🔥
+                    <div class="cream"></div>
+
+                </div>
+
+                <div class="cake-middle">
+
+                    <div class="cream"></div>
+
+                </div>
+
+                <div class="cake-top">
+
+                    <div class="cream"></div>
+
+                </div>
+
+
+                <!-- Candle 1 -->
+
+                <div class="candle one">
+
+                    <div
+                        class="flame"
+                        id="flame1">
+
+                        🔥
+
+                    </div>
+
+                </div>
+
+
+                <!-- Candle 2 -->
+
+                <div class="candle two">
+
+                    <div
+                        class="flame"
+                        id="flame2">
+
+                        🔥
+
+                    </div>
+
+                </div>
+
+
+                <!-- Candle 3 -->
+
+                <div class="candle three">
+
+                    <div
+                        class="flame"
+                        id="flame3">
+
+                        🔥
+
+                    </div>
+
                 </div>
 
             </div>
@@ -587,11 +820,13 @@ button:hover {
         <div
             class="countdown"
             id="countdown">
+
             3
+
         </div>
 
         <p id="candleMessage">
-            Get ready... 😌
+            Get ready... 🕯️
         </p>
 
     </div>
@@ -615,7 +850,7 @@ button:hover {
         </div>
 
         <div class="name">
-           VARUN VISHAL
+            VARUN VISHAL
         </div>
 
         <p>
@@ -637,6 +872,7 @@ button:hover {
 
 
 <script>
+
 
 /* ================= PAGE CONTROL ================= */
 
@@ -673,7 +909,7 @@ function yesClicked() {
 }
 
 
-/* ================= NO BUTTON RUNS AWAY ================= */
+/* ================= NO RUNS AWAY ================= */
 
 const noButton =
     document.getElementById("noButton");
@@ -740,7 +976,7 @@ function openEnvelope() {
     envelope.classList.add("open");
 
     text.innerHTML =
-        "Okay... you found the letter. 👀";
+        "The letter is open. 👀";
 
     setTimeout(function() {
 
@@ -751,7 +987,7 @@ function openEnvelope() {
 }
 
 
-/* ================= PARTY POPPER ================= */
+/* ================= HUGE POPPER ================= */
 
 function partyTransition() {
 
@@ -767,10 +1003,10 @@ function partyTransition() {
         "🎈",
         "🥳",
         "⭐",
-        "📜"
+        "🎁"
     ];
 
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 100; i++) {
 
         const piece =
             document.createElement("div");
@@ -781,7 +1017,8 @@ function partyTransition() {
         piece.innerText =
             pieces[
                 Math.floor(
-                    Math.random() * pieces.length
+                    Math.random() *
+                    pieces.length
                 )
             ];
 
@@ -789,7 +1026,7 @@ function partyTransition() {
             Math.random() * Math.PI * 2;
 
         const distance =
-            250 + Math.random() * 600;
+            300 + Math.random() * 700;
 
         const x =
             Math.cos(angle) * distance;
@@ -814,6 +1051,7 @@ function partyTransition() {
             piece.remove();
 
         }, 1800);
+
     }
 
     setTimeout(function() {
@@ -834,45 +1072,80 @@ function startCountdown() {
     const countdown =
         document.getElementById("countdown");
 
-    const flame =
-        document.getElementById("flame");
-
     const message =
         document.getElementById("candleMessage");
+
+    const flames = [
+        document.getElementById("flame1"),
+        document.getElementById("flame2"),
+        document.getElementById("flame3")
+    ];
 
     let number = 3;
 
     countdown.innerHTML = number;
 
     message.innerHTML =
-        "Get ready... 🕯️";
+        "Get ready to blow... 🕯️";
+
+
+    /* 3 → 2 */
 
     setTimeout(function() {
 
         number = 2;
 
-        countdown.innerHTML = number;
+        countdown.innerHTML =
+            number;
 
     }, 1000);
+
+
+    /* 2 → 1 */
 
     setTimeout(function() {
 
         number = 1;
 
-        countdown.innerHTML = number;
+        countdown.innerHTML =
+            number;
 
     }, 2000);
+
+
+    /* 1 → 0 + BLOW */
 
     setTimeout(function() {
 
         countdown.innerHTML = "0";
 
         message.innerHTML =
-            "And... the candle is out! 🎉";
+            "BLOWWWW! 💨";
 
-        flame.classList.add("off");
+        flames.forEach(function(flame) {
+
+            flame.classList.add("blowing");
+
+        });
+
+        /* Give the flames time to flicker */
+
+        setTimeout(function() {
+
+            flames.forEach(function(flame) {
+
+                flame.classList.remove("blowing");
+
+                flame.classList.add("off");
+
+            });
+
+        }, 900);
 
     }, 3000);
+
+
+    /* Final page */
 
     setTimeout(function() {
 
@@ -880,7 +1153,7 @@ function startCountdown() {
 
         startConfetti();
 
-    }, 4000);
+    }, 4300);
 }
 
 
@@ -909,7 +1182,8 @@ function startConfetti() {
         confetti.innerText =
             pieces[
                 Math.floor(
-                    Math.random() * pieces.length
+                    Math.random() *
+                    pieces.length
                 )
             ];
 
